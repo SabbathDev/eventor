@@ -19,22 +19,18 @@ class _LoginState extends State<Login> {
             const Center(
               child: Image(image: AssetImage('assets/images/logo.png')),
             ),
-            const Center(
+            Center(
                 child: Text(
               'DISCOVER POPULAR EVENTS & NEARBY FUN',
-              style: TextStyle(fontSize: 13.0),
+              style: Theme.of(context).textTheme.headline1,
             )),
             const SizedBox(
               height: 100.0,
             ),
-            const Center(
+            Center(
               child: Text(
                 'ENTER YOUR EMAIL AND PASSWORD TO LOGIN',
-                style: TextStyle(
-                    fontSize: 13.0,
-                    fontFamily: 'Mulish',
-                    color: Colors.grey
-                ),
+                style: Theme.of(context).textTheme.headline2,
               ),
             ),
             const SizedBox(
@@ -47,10 +43,7 @@ class _LoginState extends State<Login> {
                   padding: const EdgeInsets.fromLTRB(25.0, 0, 0, 0),
                   child: Text(
                     'EMAIL',
-                    style: TextStyle(
-                        fontSize: 12.0,
-                        fontFamily: 'Mulish',
-                        color: Colors.grey[800]),
+                    style: Theme.of(context).textTheme.headline2,
                   ),
                 ),
                 Padding(
@@ -60,22 +53,14 @@ class _LoginState extends State<Login> {
                         prefixIcon: const Icon(Icons.mail_outline_rounded),
                         border: const OutlineInputBorder(),
                         hintText: 'name@email.com',
-                        hintStyle: TextStyle(
-                          fontSize: 16.0,
-                          fontFamily: 'Mulish',
-                          color: Colors.grey[200],
-                        )),
+                        hintStyle: Theme.of(context).textTheme.bodyText1,),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(25.0, 0, 0, 0),
                   child: Text(
                     'PASSWORD',
-                    style: TextStyle(
-                      fontSize: 12.0,
-                      fontFamily: 'Mulish',
-                      color: Colors.grey[800],
-                    ),
+                    style: Theme.of(context).textTheme.headline2,
                   ),
                 ),
                 Padding(
@@ -85,10 +70,7 @@ class _LoginState extends State<Login> {
                         prefixIcon: const Icon(Icons.lock),
                         border: const OutlineInputBorder(),
                         hintText: 'Password',
-                        hintStyle: TextStyle(
-                            fontSize: 16.0,
-                            fontFamily: 'Mulish',
-                            color: Colors.grey[200])),
+                        hintStyle: Theme.of(context).textTheme.bodyText1,),
                   ),
                 ),
                 const SizedBox(
@@ -101,14 +83,15 @@ class _LoginState extends State<Login> {
                           primary: Colors.white,
                           backgroundColor: Colors.blue[500],
                           minimumSize: const Size(335.0, 52.0),
-                          textStyle: const TextStyle(
-                              fontSize: 15.0, fontFamily: 'Mulish'),
+                          textStyle: Theme.of(context).textTheme.headline1,
                           shape: const RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(50.0)))),
                       onPressed: () {}, //TODO login logic
-                      child: const Center(
-                        child: Text('LOGIN'),
+                      child: Center(
+                        child: Text('LOGIN',
+                          style: Theme.of(context).textTheme.headline5,
+                        ),
                       )),
                 ),
                 const SizedBox(
@@ -119,17 +102,13 @@ class _LoginState extends State<Login> {
                   children: [
                     Text(
                       'Haven`t an account yet?',
-                      style: TextStyle(
-                          fontSize: 16.0,
-                          fontFamily: 'Mulish',
-                          color: Colors.grey[400]),
+                      style: Theme.of(context).textTheme.bodyText1,
                     ),
                     TextButton(
                         onPressed: () {}, //TODO sign up logic
-                        child: const Text(
+                        child: Text(
                           'Sign Up',
-                          style:
-                              TextStyle(fontSize: 16.0, fontFamily: 'Mulish'),
+                          style: Theme.of(context).textTheme.bodyText2,
                         ))
                   ],
                 )
