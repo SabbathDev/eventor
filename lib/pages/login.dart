@@ -1,4 +1,7 @@
+import 'package:eventor/services/AuthService.dart';
 import 'package:flutter/material.dart';
+
+import '../domain/user.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -8,6 +11,24 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  AuthService _authService = AuthService();
+
+  late String _email;
+  late String _password;
+  bool isLogged = false;
+
+  void _buttonAction() async{
+    _email = _emailController.text;
+    _password = _passwordController.text;
+    print(_email + "  " + _password ); //TODO logic for log in auth
+    User user = await _authService.loginIn(_email, _password);
+    _emailController.clear();
+    _passwordController.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +77,8 @@ class _LoginState extends State<Login> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: TextField(
+                    child: TextFormField(
+                      controller: _emailController,
                       decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.mail_outline_rounded),
                           border: const OutlineInputBorder(),
@@ -82,6 +104,7 @@ class _LoginState extends State<Login> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
+                      controller: _passwordController,
                       obscureText: true,
                       decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.lock),
@@ -108,7 +131,9 @@ class _LoginState extends State<Login> {
                             shape: const RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(50.0)))),
-                        onPressed: () {}, //TODO login logic
+                        onPressed: () {
+                          _buttonAction();
+                        }, //TODO login logic
                         child: const Center(
                           child: Text('LOGIN'),
                         )),

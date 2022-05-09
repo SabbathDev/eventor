@@ -6,21 +6,17 @@ import 'package:eventor/theme/theme_constants.dart';
 void main() => runApp(const Eventor());
 
 
-class Eventor extends StatefulWidget {
+class Eventor extends StatelessWidget {
   const Eventor({Key? key}) : super(key: key);
-
-  @override
-  State<Eventor> createState() => _EventorState();
-}
-
-class _EventorState extends State<Eventor> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+
       theme: lightTheme,
       darkTheme: darkTheme,
 
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.dark,
 
       initialRoute: '/login',
       routes: {

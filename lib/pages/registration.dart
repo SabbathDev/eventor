@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:eventor/domain/user.dart';
+import '../services/AuthService.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({Key? key, title}) : super(key: key);
@@ -8,6 +10,34 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
+
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _repeatPasswordController = TextEditingController();
+
+  final AuthService _authService = AuthService();
+
+
+  late String _name;
+  late String _email;
+  late String _password;
+
+  void _buttonAction() async{
+    _name = _nameController.text;
+    _email = _emailController.text;
+    _password = _passwordController.text;
+    if(_password == _repeatPasswordController.text){
+      print(_email + "  " + _password + "  " + _name ); //TODO logic for sign in auth
+      User user = await _authService.signIn(_name, _email, _password);
+    }else{
+      print("Error: wrong repeat password"); //TODO error system
+    }
+    _nameController.clear();
+    _emailController.clear();
+    _passwordController.clear();
+    _repeatPasswordController.clear();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +76,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
                             Padding(
                               padding: const EdgeInsets.fromLTRB(0, 8, 0, 15),
-                              child: TextField(
+                              child: TextFormField(
+                                controller: _nameController,
                                   decoration: InputDecoration(
                                     prefixIcon: const Icon(Icons.person_outline),
                                     border: const OutlineInputBorder(),
@@ -62,7 +93,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
                             Padding(
                               padding: const EdgeInsets.fromLTRB(0, 8, 0, 15),
-                              child: TextField(
+                              child: TextFormField(
+                                controller: _emailController,
                                 decoration: InputDecoration(
                                     prefixIcon: const Icon(Icons.mail_outline_rounded),
                                     border: const OutlineInputBorder(),
@@ -79,6 +111,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             Padding(
                               padding: const EdgeInsets.fromLTRB(0, 8, 0, 15),
                               child: TextFormField(
+                                controller: _passwordController,
                                 decoration: InputDecoration(
                                     prefixIcon: const Icon(Icons.lock_outline),
                                     border: const OutlineInputBorder(),
@@ -96,6 +129,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             Padding(
                               padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
                               child: TextFormField(
+                                controller: _repeatPasswordController,
                                 decoration: InputDecoration(
                                     prefixIcon: const Icon(Icons.lock_outline),
                                     border: const OutlineInputBorder(),
@@ -121,8 +155,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               BorderRadius.all(Radius.circular(50.0))
                           )
                       ),
-                      onPressed: () {}, //TODO registration logic
-
+                      onPressed: () => _buttonAction(),
                       child: Text(
                         'SIGN UP',
                         style: Theme.of(context).textTheme.headline5,
