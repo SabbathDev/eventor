@@ -1,3 +1,4 @@
+import 'map.dart';
 import 'package:eventor/pages/profile.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,7 @@ class _MainScreenState extends State<MainScreen> {
   //add screen widget to list for tabs (mind order)
   List<Widget> pageList = <Widget>[
     const Scaffold(),
-    const Scaffold(),
+    const MapPage(),
     const ProfilePage()
   ];
   int _selectedIndex = 1;
