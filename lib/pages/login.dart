@@ -38,8 +38,8 @@ class _LoginState extends State<Login> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const Center(
-                child: Image(image: AssetImage('assets/images/logo.png')),
+              Center(
+                child: MediaQuery.of(context).platformBrightness == Brightness.light ?  const Image(image: AssetImage('assets/images/logo.png')) : const Image(image: AssetImage('assets/images/logo_dark.png')),
               ),
               Center(
                   child: Text(
