@@ -24,7 +24,7 @@ class _LoginState extends State<Login> {
     _email = _emailController.text;
     _password = _passwordController.text;
     print(_email + "  " + _password ); //TODO logic for log in auth
-    User user = await _authService.loginIn(_email, _password);
+    //User user = await _authService.loginIn(_email, _password);
     _emailController.clear();
     _passwordController.clear();
   }
@@ -39,7 +39,7 @@ class _LoginState extends State<Login> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Center(
-                child: MediaQuery.of(context).platformBrightness == Brightness.light ?  const Image(image: AssetImage('assets/images/logo.png')) : const Image(image: AssetImage('assets/images/logo_dark.png')),
+                child: Theme.of(context).brightness == Brightness.light ?  const Image(image: AssetImage('assets/images/logo.png')) : const Image(image: AssetImage('assets/images/logo_dark.png')),
               ),
               Center(
                   child: Text(
