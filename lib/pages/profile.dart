@@ -104,7 +104,9 @@ class _ProfilePageState extends State<ProfilePage>
         ),
       ),
       floatingActionButton: _tabController.index == 0 ? FloatingActionButton(
-          onPressed: () {  },//TODO:edit logic
+          onPressed: () {
+            Navigator.pushNamed(context, '/profile/edit');
+          },
           child: const Icon(Icons.edit),
       ) : null,
     );
