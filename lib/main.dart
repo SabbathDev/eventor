@@ -1,3 +1,4 @@
+import 'package:eventor/pages/edit_profile.dart';
 import 'package:eventor/pages/login.dart';
 import 'package:eventor/pages/registration.dart';
 import 'package:flutter/material.dart';
@@ -17,11 +18,11 @@ class Eventor extends StatelessWidget {
       darkTheme: darkTheme,
 
       themeMode: ThemeMode.dark,
-
       initialRoute: '/login',
       routes: {
         '/login': (context) => const Login(),
         '/login/registration': (context) => const RegistrationPage(),
+        '/profile/edit': (context) => const EditProfilePage(),
       },
     );
   }
