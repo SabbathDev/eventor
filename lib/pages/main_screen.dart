@@ -1,4 +1,5 @@
-import 'map.dart';
+import 'package:eventor/pages/events.dart';
+import 'package:eventor/pages/map.dart';
 import 'package:eventor/pages/profile.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   //add screen widget to list for tabs (mind order)
   List<Widget> pageList = <Widget>[
-    const Scaffold(),
+    const EventsPage(),
     const MapPage(),
     const ProfilePage()
   ];
