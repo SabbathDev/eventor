@@ -1,7 +1,6 @@
+import 'package:eventor/entities/current_user.dart';
 import 'package:eventor/services/AuthService.dart';
 import 'package:flutter/material.dart';
-
-import '../domain/user.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -11,10 +10,10 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
-  AuthService _authService = AuthService();
+  final AuthService _authService = AuthService();
 
   late String _email;
   late String _password;
@@ -24,8 +23,7 @@ class _LoginState extends State<Login> {
     _email = _emailController.text;
     _password = _passwordController.text;
     print(_email + "  " + _password ); //TODO logic for log in auth
-    //User user = await _authService.loginIn(_email, _password);
-    _emailController.clear();
+    CurrentUser user = await _authService.loginIn(_email, _password);
     _passwordController.clear();
   }
 

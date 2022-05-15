@@ -1,18 +1,24 @@
-import 'package:flutter/material.dart';
-import 'package:eventor/domain/user.dart';
+import 'package:eventor/entities/current_user.dart';
 
 class AuthService{
-  Future<User> loginIn(String email, String password) async{
-    User user = User.fromLogIn(email, password);
-    return user;
-      //TODO log in logic
+  Future<CurrentUser> loginIn(String email, String password) async{
+    //TODO log in logic
+
+    int cUserId = 1;    //TODO fetch user data after the login
+    String cUserName = "Robbie Rotten";
+    String cUserToken = "plz someone do the login logic";
+    return CurrentUser(cUserId, cUserName, email, cUserToken);
   }
-  Future<User> signIn(String name, String email, String password) async{
-    User user = User.fromLogIn(email, password);
-    return user;
+
+  Future<CurrentUser> signIn(String name, String email, String password) async{
     //TODO sign in logic
+
+    int cUserId = 1;    //TODO fetch user data after the sign in
+    String cUserToken = "plz someone do the registration logic";
+    return CurrentUser(cUserId, name, email, cUserToken);
   }
-  Future logOut(String email, String password) async{
+
+  Future logOut() async{
     //TODO log out logic
   }
 }

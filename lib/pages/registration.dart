@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:eventor/domain/user.dart';
+import 'package:eventor/entities/current_user.dart';
 import '../services/AuthService.dart';
 
 class RegistrationPage extends StatefulWidget {
@@ -18,7 +18,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   final AuthService _authService = AuthService();
 
-
   late String _name;
   late String _email;
   late String _password;
@@ -27,14 +26,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
     _name = _nameController.text;
     _email = _emailController.text;
     _password = _passwordController.text;
+
     if(_password == _repeatPasswordController.text){
-      print(_email + "  " + _password + "  " + _name ); //TODO logic for sign in auth
-      User user = await _authService.signIn(_name, _email, _password);
-    }else{
-      print("Error: wrong repeat password"); //TODO error system
+      print(_email + "  " + _password + "  " + _name );
+      CurrentUser user = await _authService.signIn(_name, _email, _password);
     }
-    _nameController.clear();
-    _emailController.clear();
+    else{print("Error: wrong repeat password");} //TODO error system
+
     _passwordController.clear();
     _repeatPasswordController.clear();
   }

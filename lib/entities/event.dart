@@ -1,18 +1,28 @@
-
+import 'package:latlong2/latlong.dart';
 
 class Event {
+  //entity class for an event
+
+  late int _eventId;
   late String _name;
   late String _description;
-  late double _locationX;
-  late double _locationY;
+  late LatLng _location;
   late int _creatorId;
   late DateTime _dateTime;
   late Duration _duration;
   late String _type;
 
+  Event(this._eventId, this._name, this._description, double locationX,
+      double locationY, this._creatorId, this._dateTime, this._duration,
+      this._type){
+    _location = LatLng(locationX, locationY);
+  }
 
-  Event(this._name, this._description, this._locationX, this._locationY,
-      this._creatorId, this._dateTime, this._duration, this._type);
+  int get eventId => _eventId;
+
+  set eventId(int value){
+    _eventId = value;
+  }
 
   String get name => _name;
 
@@ -44,16 +54,10 @@ class Event {
     _creatorId = value;
   }
 
-  double get location_y => _locationY;
+  LatLng get location => _location;
 
-  set location_y(double value) {
-    _locationY = value;
-  }
-
-  double get location_x => _locationX;
-
-  set location_x(double value) {
-    _locationX = value;
+  set location(LatLng value) {
+    _location = value;
   }
 
   String get description => _description;

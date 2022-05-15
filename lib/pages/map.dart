@@ -44,7 +44,7 @@ class _MapPageState extends State<MapPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () => _addEvent(),
         tooltip: 'Increment',
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
