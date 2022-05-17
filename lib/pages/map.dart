@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
+import '../services/location_service.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({Key? key}) : super(key: key);
@@ -10,15 +11,25 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
-  void _addEvent(){}//TODO logic for event creation
+  LatLng currentLoc = LatLng(51.5, -0.09);
+
+  final MapController mapController = MapController();
+
+  void _centerOnUser() async{
+    currentLoc = await LocationService().getUserLocation();
+    mapController.move(currentLoc, 13);
+  }
+
+  void _addEvent() { }//TODO logic for event creation
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: FlutterMap(
+          mapController: mapController,
           options: MapOptions(
-            center: LatLng(51.5, -0.09), //TODO center on user location
+            center: currentLoc, //TODO center on user location
             zoom: 13.0,
           ),
           layers: [
@@ -31,7 +42,7 @@ class _MapPageState extends State<MapPage> {
                 Marker(
                   width: 80.0,
                   height: 80.0,
-                  point: LatLng(51.5, -0.09),
+                  point: currentLoc,
                   builder: (ctx) =>
                   const FlutterLogo(),
                 ),
@@ -42,7 +53,7 @@ class _MapPageState extends State<MapPage> {
       ),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _addEvent(),
+        onPressed: () => _centerOnUser(),
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
