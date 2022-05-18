@@ -1,4 +1,5 @@
-import 'package:eventor/entities/current_user.dart';
+import 'package:eventor/dao/current_user.dart';
+import 'package:eventor/dao/current_user.dart';
 import 'package:eventor/services/AuthService.dart';
 import 'package:flutter/material.dart';
 
@@ -22,8 +23,14 @@ class _LoginState extends State<Login> {
   void _buttonAction() async{
     _email = _emailController.text;
     _password = _passwordController.text;
-    print(_email + "  " + _password ); //TODO logic for log in auth
-    CurrentUser user = await _authService.loginIn(_email, _password);
+
+    if(await _authService.loginIn(_email, _password) == '200'){
+      Navigator.pushNamed(context, '/main_screen');
+    }else{
+      print('Auth Fail');
+    };
+
+    _passwordController.clear();
     _passwordController.clear();
   }
 

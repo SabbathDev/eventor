@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:eventor/entities/current_user.dart';
+import 'package:eventor/dao/current_user.dart';
 import '../services/AuthService.dart';
 
 class RegistrationPage extends StatefulWidget {

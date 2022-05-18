@@ -3,9 +3,8 @@ class User {
 
   late int _userId;
   late String _name;
-  late String _email;
 
-  User(this._userId, this._name, this._email);
+  User(this._userId, this._name);
 
   int get userId => _userId;
 
@@ -17,11 +16,5 @@ class User {
 
   set name(String value) {
     _name = value;
-  }
-
-  String get email => _email;
-
-  set email(String value) {
-    _email = value;
   }
 }
