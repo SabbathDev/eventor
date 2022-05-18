@@ -28,13 +28,21 @@ class _RegistrationPageState extends State<RegistrationPage> {
     _password = _passwordController.text;
 
     if(_password == _repeatPasswordController.text){
-      print(_email + "  " + _password + "  " + _name );
-      CurrentUser user = await _authService.signIn(_name, _email, _password);
+      if(await _authService.signIn(_name, _email, _password) == '200') {
+        _nameController.clear();
+        _emailController.clear();
+        _passwordController.clear();
+        _repeatPasswordController.clear();
+        Navigator.pushNamedAndRemoveUntil(context, '/main_screen', ModalRoute.withName('/'));
+      }else{
+        print('Auth Fail');
+      }
     }
-    else{print("Error: wrong repeat password");} //TODO error system
-
-    _passwordController.clear();
-    _repeatPasswordController.clear();
+    else{
+      print("Error: wrong repeat password");
+      _passwordController.clear();
+      _repeatPasswordController.clear();
+    } //TODO error system
   }
 
   @override

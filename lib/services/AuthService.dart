@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:eventor/dao/current_user.dart';
 import 'package:eventor/services/api_constants.dart';
@@ -41,12 +40,29 @@ class AuthService {
     return CurrentUser(-1, '', '', '');
   }
 
-  Future<CurrentUser> signIn(String name, String email, String password) async{
-    //TODO sign in logic
-
-    int cUserId = 1;    //TODO fetch user data after the sign in
-    String cUserToken = "plz someone do the registration logic";
-    return CurrentUser(cUserId, name, email, cUserToken);
+  Future<String> signIn(String name, String email, String password) async{
+    var res = await http.post(Uri.parse("$serverIP/api/registration"),
+        headers: {
+          "content-type":"application/json"
+        },
+        body: jsonEncode(
+            {
+              "id": null,
+              "name": name,
+              "email": email,
+              "phone": "null",
+              "work": "null",
+              "birthday": "null",
+              "photo": null,
+              "role": null,
+              "pw_hash": password,
+              "creatorEvents": [],
+              "events": []
+            }));
+    if (res.statusCode == 200) {
+      return loginIn(email, password);
+    }
+    return res.statusCode.toString();
   }
 
   Future logOut(String email, String password) async {

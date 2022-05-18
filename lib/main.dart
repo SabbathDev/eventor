@@ -20,7 +20,7 @@ class Eventor extends StatelessWidget {
       theme: lightTheme,
       darkTheme: darkTheme,
 
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.light,
       initialRoute: '/login',
       routes: {
         '/login': (context) => const Login(),

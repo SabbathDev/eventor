@@ -25,12 +25,12 @@ class _LoginState extends State<Login> {
     _password = _passwordController.text;
 
     if(await _authService.loginIn(_email, _password) == '200'){
-      Navigator.pushNamed(context, '/main_screen');
+      Navigator.pushNamedAndRemoveUntil(context, '/main_screen', ModalRoute.withName('/'));
     }else{
       print('Auth Fail');
     };
 
-    _passwordController.clear();
+    _emailController.clear();
     _passwordController.clear();
   }
 
