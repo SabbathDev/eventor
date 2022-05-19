@@ -6,6 +6,12 @@ class User {
 
   User(this._userId, this._name);
 
+  factory User.fromJson(Map<String, dynamic> data) {
+    final userId = data['id'] as int;
+    var name = data['name'] as String?;
+    name ??= '';
+    return User(userId, name);
+  }
   int get userId => _userId;
 
   set userId(int value) {

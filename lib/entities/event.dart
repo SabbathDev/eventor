@@ -1,3 +1,4 @@
+import 'package:eventor/entities/user.dart';
 import 'package:latlong2/latlong.dart';
 
 class Event {
@@ -9,13 +10,24 @@ class Event {
   late LatLng _location;
   late int _creatorId;
   late DateTime _dateTime;
-  late Duration _duration;
-  late String _type;
+  late String _duration;
 
   Event(this._eventId, this._name, this._description, double locationX,
-      double locationY, this._creatorId, this._dateTime, this._duration,
-      this._type){
+      double locationY, this._creatorId, this._dateTime, this._duration){
     _location = LatLng(locationX, locationY);
+  }
+
+  factory Event.fromJson(Map<String, dynamic> data) {
+    var creator = User.fromJson(data['creator']);
+    var eventId = data['id'] as int;
+    var name = data['name'] as String;
+    var description = data['description'] as String;
+    var locationX = data['longitude'] as double;
+    var locationY = data['latitude'] as double;
+    var creatorId = creator.userId;
+    DateTime dateTime = DateTime.parse(data['date'] as String);
+    var duration = creator.name;
+    return Event(eventId, name, description, locationX, locationY, creatorId, dateTime, duration);
   }
 
   int get eventId => _eventId;
@@ -28,18 +40,6 @@ class Event {
 
   set name(String value) {
     _name = value;
-  }
-
-  String get type => _type;
-
-  set type(String value) {
-    _type = value;
-  }
-
-  Duration get duration => _duration;
-
-  set duration(Duration value) {
-    _duration = value;
   }
 
   DateTime get dateTime => _dateTime;
