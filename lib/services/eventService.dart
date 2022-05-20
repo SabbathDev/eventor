@@ -6,7 +6,8 @@ import 'package:http/http.dart' as http;
 import 'AuthService.dart';
 
 class EventService{
-  Future<List<dynamic>> getAllActiveEvents() async {
+
+  Future<dynamic> getAllActiveEvents() async {
 
     String jwt = await AuthService().jwtOrEmpty;
     var res = await http.get(Uri.parse("$serverIP/api/event/all/active"),
@@ -20,6 +21,6 @@ class EventService{
     }
     //print(jsonDecode(res.body).toString());
     //print(res.statusCode.toString());
-    return <List<dynamic>>[];
+    return <dynamic>[];
   }
 }

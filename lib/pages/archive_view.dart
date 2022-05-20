@@ -1,6 +1,8 @@
+import 'package:eventor/models/eventListModel.dart';
 import 'package:flutter/material.dart';
 import '../entities/event.dart';
 import '../services/eventService.dart';
+import 'package:provider/provider.dart';
 
 
 
@@ -50,6 +52,7 @@ class ArchiveView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ChangeNotifierProvider(create: (context) => EventListModel(),);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: _archiveEvents.map((event) => Card(
