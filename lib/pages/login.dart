@@ -18,8 +18,7 @@ class _LoginState extends State<Login> {
 
   late String _email;
   late String _password;
-  bool isLogged = false;
-
+  bool islogged = false;
   void _buttonAction() async{
     _email = _emailController.text;
     _password = _passwordController.text;

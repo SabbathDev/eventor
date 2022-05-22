@@ -6,7 +6,10 @@ import '../services/eventService.dart';
 class EventListModel extends ChangeNotifier{
   final _events = <Event>[];
   Future<void> loadAllActiveEvents() async{
-    final eventsResponse = await EventService().getAllActiveEvents();
+
+    List<Event> eventsResponse;
+    eventsResponse = await EventService().getAllActiveEvents() as List<Event>;
+    _events.clear();
     _events.addAll(eventsResponse);
     notifyListeners();
   }

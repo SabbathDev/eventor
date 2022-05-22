@@ -2,6 +2,8 @@ import 'package:eventor/pages/archive_view.dart';
 import 'package:eventor/pages/personal_info_view.dart';
 import 'package:flutter/material.dart';
 
+import '../services/AuthService.dart';
+
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
@@ -71,7 +73,10 @@ class _ProfilePageState extends State<ProfilePage>
             IconButton(
               icon: const Icon(Icons.settings),
               color: Colors.grey[400],
-              onPressed: () {},
+              onPressed: () async {
+                  await AuthService().logOut();
+                  Navigator.pushNamedAndRemoveUntil(context, '/login', ModalRoute.withName('/'));
+                },
             ),
           ]
       ),

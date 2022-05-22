@@ -14,6 +14,9 @@ class Event {
 
   Event(this._eventId, this._name, this._description, double locationX,
       double locationY, this._creatorId, this._dateTime, this._duration){
+    if(locationX > 90.0){
+      locationX = 80.0; //TODO из ивента приходят значения больше 90 нужен фикс на сервере потом следует это убрать
+    }
     _location = LatLng(locationX, locationY);
   }
 
@@ -25,7 +28,7 @@ class Event {
     var locationX = data['longitude'] as double;
     var locationY = data['latitude'] as double;
     var creatorId = creator.userId;
-    DateTime dateTime = DateTime.parse(data['date'] as String);
+    DateTime dateTime = DateTime.parse(data['startDate'] as String);
     var duration = creator.name;
     return Event(eventId, name, description, locationX, locationY, creatorId, dateTime, duration);
   }

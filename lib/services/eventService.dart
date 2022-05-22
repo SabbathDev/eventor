@@ -7,20 +7,20 @@ import 'AuthService.dart';
 
 class EventService{
 
-  Future<dynamic> getAllActiveEvents() async {
+  Future<List<Event>> getAllActiveEvents() async {
 
     String jwt = await AuthService().jwtOrEmpty;
     var res = await http.get(Uri.parse("$serverIP/api/event/all/active"),
         headers: {'Authorization': jwt});
     print(res.statusCode.toString());
     if (res.statusCode == 200) {
-      final eventsData = jsonDecode(res.body) as List<dynamic>?;
+      List<Event> eventsData;
+      eventsData = (jsonDecode(res.body) as List<dynamic>).map((e) => Event.fromJson(e)).toList();
       print(eventsData);
-      eventsData!.map((eventsData) => Event.fromJson(eventsData)).toList();
       return eventsData;
     }
     //print(jsonDecode(res.body).toString());
     //print(res.statusCode.toString());
-    return <dynamic>[];
+    return <Event>[];
   }
 }

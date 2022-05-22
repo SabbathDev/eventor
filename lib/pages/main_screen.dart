@@ -1,7 +1,9 @@
+import 'package:eventor/models/eventListModel.dart';
 import 'package:eventor/pages/events.dart';
 import 'package:eventor/pages/map.dart';
 import 'package:eventor/pages/profile.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -11,6 +13,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+
   //add screen widget to list for tabs (mind order)
   List<Widget> pageList = <Widget>[
     const EventsPage(),
@@ -18,6 +21,12 @@ class _MainScreenState extends State<MainScreen> {
     const ProfilePage()
   ];
   int _selectedIndex = 1;
+  @override
+  void initState() {
+    super.initState();
+    context.read<EventListModel>().loadAllActiveEvents();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,9 +40,11 @@ class _MainScreenState extends State<MainScreen> {
           });
         },
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: "Events"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home_outlined), label: "Events"),
           BottomNavigationBarItem(icon: Icon(Icons.map), label: "Map"),
-          BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: "Profile"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person_outline), label: "Profile"),
         ],
       ),
     );
