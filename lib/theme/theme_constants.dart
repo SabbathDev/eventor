@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 ThemeData lightTheme = ThemeData(
@@ -15,7 +16,12 @@ ThemeData lightTheme = ThemeData(
 );
 
 ThemeData darkTheme = ThemeData(
-  brightness: Brightness.dark,
+  colorScheme: const ColorScheme.dark(
+    primary: Colors.blue,
+    secondary: Colors.blue,
+  ),
+
+  indicatorColor: Colors.blue,
   fontFamily: 'Mulish',
 
   textTheme: const TextTheme(
@@ -26,4 +32,12 @@ ThemeData darkTheme = ThemeData(
     bodyText1: TextStyle(fontSize: 15, color: Colors.grey),                               //main body text
     bodyText2: TextStyle(fontSize: 15, color: Colors.blue, fontWeight: FontWeight.bold),  //link text
   ),
+
+  cupertinoOverrideTheme: const CupertinoThemeData(
+    brightness: Brightness.dark,
+    barBackgroundColor: Color(0x00000000),
+    textTheme: CupertinoTextThemeData(
+      primaryColor: Colors.white,
+    ),
+  )
 );

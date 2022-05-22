@@ -16,7 +16,6 @@ class _EventsPageState extends State<EventsPage> with TickerProviderStateMixin {
     const ArchiveView()
   ];
 
-
   @override
   void initState() {
     super.initState();
