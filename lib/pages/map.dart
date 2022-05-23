@@ -53,7 +53,7 @@ class _MapPageState extends State<MapPage> {
       ),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _centerOnUser(),
+        onPressed: () => Navigator.pushNamed(context, '/map/createEvent'),
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),

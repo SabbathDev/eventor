@@ -12,7 +12,7 @@ class EventsPage extends StatefulWidget {
 class _EventsPageState extends State<EventsPage> with TickerProviderStateMixin {
   int _selectedSegment = 0;
   late List<Widget> eventPages = [
-    const ArchiveView(), //TODO make new templates for event page
+    const ArchiveView(), //TODO dynamically load event lists for each tab
     const ArchiveView()
   ];
 
@@ -22,8 +22,6 @@ class _EventsPageState extends State<EventsPage> with TickerProviderStateMixin {
   }
 
   Widget getChildWidget() => eventPages[_selectedSegment];
-
-  void _addEvent(){}//TODO logic for event creation
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +84,7 @@ class _EventsPageState extends State<EventsPage> with TickerProviderStateMixin {
       ),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _addEvent(),
+        onPressed: () => Navigator.pushNamed(context, '/events/createEvent'),
         tooltip: 'Increment',
         child: const Icon(Icons.add)
       )
