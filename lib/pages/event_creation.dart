@@ -169,6 +169,7 @@ class _EventCreationPageState extends State<EventCreationPage> {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(0, 8, 0, 15),
                           child: TextFormField(
+                            keyboardType: TextInputType.number,
                             controller: _priceCtrl,
                             decoration: InputDecoration(
                                 prefixIcon: const Icon(Icons.monetization_on_outlined),
