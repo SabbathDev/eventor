@@ -9,15 +9,34 @@ class Event {
   late String _description;
   late LatLng _location;
   late int _creatorId;
-  late DateTime _dateTime;
-  late String _duration;
+  late DateTime _startDate;
+  late DateTime _endDate;
+  late double _price;
+  late String _status;
+  late Duration _duration;
 
-  Event(this._eventId, this._name, this._description, double locationX,
-      double locationY, this._creatorId, this._dateTime, this._duration){
-    if(locationX > 90.0){
-      locationX = 80.0; //TODO из ивента приходят значения больше 90 нужен фикс на сервере потом следует это убрать
+
+  Event(this._eventId, this._name, this._description, double longitude,
+      double latitude, this._creatorId, this._startDate, this._endDate, this._price){
+    _location = LatLng(latitude, longitude);
+    _setStatusAndDuration();
+  }
+
+  void _setStatusAndDuration(){
+    DateTime simpleDate = DateTime.now();
+    if(simpleDate.isBefore(_startDate)){
+      _status = 'Scheduled';
+      _duration = _startDate.difference(simpleDate);
+    }else {
+      if (simpleDate.isBefore(_endDate)) {
+        _status = 'Started';
+        _duration = _endDate.difference(simpleDate);
+      } else {
+        if (simpleDate.isAfter(_endDate)) {
+          _status = 'Ended';
+        }
+      }
     }
-    _location = LatLng(locationX, locationY);
   }
 
   factory Event.fromJson(Map<String, dynamic> data) {
@@ -25,47 +44,33 @@ class Event {
     var eventId = data['id'] as int;
     var name = data['name'] as String;
     var description = data['description'] as String;
-    var locationX = data['longitude'] as double;
-    var locationY = data['latitude'] as double;
+    var longitude = data['longitude'] as double;
+    var latitude = data['latitude'] as double;
     var creatorId = creator.userId;
-    DateTime dateTime = DateTime.parse(data['startDate'] as String);
-    var duration = creator.name;
-    return Event(eventId, name, description, locationX, locationY, creatorId, dateTime, duration);
+    DateTime startDate = DateTime.parse(data['startDate'] as String);
+    DateTime endDate = DateTime.parse(data['endDate'] as String);
+    var price = data['price'] as double;
+    return Event(eventId, name, description, longitude, latitude, creatorId, startDate, endDate, price);
   }
 
   int get eventId => _eventId;
 
-  set eventId(int value){
-    _eventId = value;
-  }
-
   String get name => _name;
 
-  set name(String value) {
-    _name = value;
-  }
-
-  DateTime get dateTime => _dateTime;
-
-  set dateTime(DateTime value) {
-    _dateTime = value;
-  }
-
-  int get creator_id => _creatorId;
-
-  set creator_id(int value) {
-    _creatorId = value;
-  }
+  int get creatorId => _creatorId;
 
   LatLng get location => _location;
 
-  set location(LatLng value) {
-    _location = value;
-  }
-
   String get description => _description;
 
-  set description(String value) {
-    _description = value;
-  }
+  DateTime get startDate => _startDate;
+
+  DateTime get endDate => _endDate;
+
+  double get price => _price;
+
+  String get status => _status;
+
+  Duration get duration => _duration;
+
 }

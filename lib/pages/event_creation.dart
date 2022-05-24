@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:latlong2/latlong.dart';
 
 class EventCreationPage extends StatefulWidget {
@@ -19,7 +20,7 @@ class _EventCreationPageState extends State<EventCreationPage> {
   final TextEditingController _eventTypeCtrl = TextEditingController();
 
   late String _eventName;
-  late LatLng _location;
+  late List<Location> _location;
   late DateTime _startDate;
   late DateTime _endDate;
   late String _description;
@@ -28,13 +29,23 @@ class _EventCreationPageState extends State<EventCreationPage> {
 
   void _buttonAction() async{
     _eventName = _eventNameCtrl.text;
-    _location = _locationCtrl.text as LatLng; //TODO proper implementation
-    _startDate = _startDateCtrl.text as DateTime;
-    _endDate = _endDateCtrl.text as DateTime;
-    _description = _descriptionCtrl.text;
-    _price = _priceCtrl.text as int;
-    _type = _eventTypeCtrl.text;
+    print(_eventName);
+    try {
+      _location = await locationFromAddress(_locationCtrl.text);
+      print(_location.first.toString());
+    } catch (e) {
+      print(e);
+    }
+    _startDate = DateTime.parse(_startDateCtrl.text);
+    _endDate = DateTime.parse(_endDateCtrl.text);
+    print(_startDate.toString());
+    print(_endDate.toString());
 
+    _description = _descriptionCtrl.text;
+    print(_description);
+    _price = int.parse(_priceCtrl.text);
+    print(_price);
+    //_type = _eventTypeCtrl.text;
     //TODO event creation system
     //TODO error system
   }

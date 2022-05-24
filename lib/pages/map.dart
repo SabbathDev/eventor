@@ -11,7 +11,7 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
-  LatLng currentLoc = LatLng(51.5, -0.09);
+  LatLng currentLoc = LatLng(53.8467373, 27.5677141);
 
   final MapController mapController = MapController();
 

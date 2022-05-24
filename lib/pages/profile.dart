@@ -75,7 +75,7 @@ class _ProfilePageState extends State<ProfilePage>
               color: Colors.grey[400],
               onPressed: () async {
                   await AuthService().logOut();
-                  Navigator.pushNamedAndRemoveUntil(context, '/login', ModalRoute.withName('/'));
+                  Navigator.pushReplacementNamed(context, '/login');
                 },
             ),
           ]

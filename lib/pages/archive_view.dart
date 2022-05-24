@@ -17,7 +17,7 @@ class ArchiveView extends StatelessWidget {
     }else if(duration.inMinutes>0){
       return '${duration.inMinutes} minutes';
     }
-    return 'error';
+    return '0';
   }
 
   @override
@@ -39,10 +39,10 @@ class ArchiveView extends StatelessWidget {
                   ],
                 ),
               ),
-              // Padding(
-              //   padding: const EdgeInsets.all(8.0),
-              //   child: Text(_printDuration(event.duration), style: Theme.of(context).textTheme.headline1,),
-              // )
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(_printDuration(event.duration), style: Theme.of(context).textTheme.headline1,),
+              )
             ],
           ),
         ),
