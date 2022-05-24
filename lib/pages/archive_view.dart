@@ -1,7 +1,5 @@
 import 'package:eventor/models/eventListModel.dart';
 import 'package:flutter/material.dart';
-import '../entities/event.dart';
-import '../services/eventService.dart';
 import 'package:provider/provider.dart';
 
 

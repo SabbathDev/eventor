@@ -53,6 +53,37 @@ class Event {
     return Event(eventId, name, description, longitude, latitude, creatorId, startDate, endDate, price);
   }
 
+  Map<String, dynamic> toJson(){
+    return <String, dynamic>{
+      "id": null,
+      "name": _name,
+      "description": _description,
+      "image": null,
+      "longitude": _location.longitude,
+      "latitude": _location.latitude,
+      "price": _price,
+      "startDate": _startDate.toIso8601String(),
+      "endDate": _endDate.toIso8601String(),
+      "status": _status,
+      "archive": false,
+      "confirmation": false,
+      "users": [],
+      "creator": {
+        "id": _creatorId,
+        "name": null,
+        "email": null,
+        "phone": null,
+        "work": null,
+        "birthday": null,
+        "photo": null,
+        "role": null,
+        "pw_hash": null,
+        "creatorEvents": null,
+        "events": null
+      }
+    };
+  }
+
   int get eventId => _eventId;
 
   String get name => _name;

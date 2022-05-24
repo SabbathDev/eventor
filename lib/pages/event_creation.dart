@@ -1,10 +1,14 @@
+import 'package:eventor/models/eventListModel.dart';
+import 'package:eventor/services/AuthService.dart';
+import 'package:eventor/services/eventService.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:eventor/entities/event.dart';
+
+import '../entities/user.dart';
 
 class EventCreationPage extends StatefulWidget {
   const EventCreationPage({Key? key}) : super(key: key);
-
   @override
   State<EventCreationPage> createState() => _EventCreationPageState();
 }
@@ -24,7 +28,7 @@ class _EventCreationPageState extends State<EventCreationPage> {
   late DateTime _startDate;
   late DateTime _endDate;
   late String _description;
-  late int _price;
+  late double _price;
   late String _type;
 
   void _buttonAction() async{
@@ -32,19 +36,24 @@ class _EventCreationPageState extends State<EventCreationPage> {
     print(_eventName);
     try {
       _location = await locationFromAddress(_locationCtrl.text);
-      print(_location.first.toString());
+      print(_location.first.latitude);
+      print(_location.first.longitude);
     } catch (e) {
       print(e);
     }
     _startDate = DateTime.parse(_startDateCtrl.text);
     _endDate = DateTime.parse(_endDateCtrl.text);
-    print(_startDate.toString());
-    print(_endDate.toString());
+    print(_startDate.toIso8601String());
+    print(_endDate.toLocal());
+    print(_endDate.toUtc());
 
     _description = _descriptionCtrl.text;
     print(_description);
-    _price = int.parse(_priceCtrl.text);
+    _price = double.parse(_priceCtrl.text);
     print(_price);
+
+    int creatorId = (await AuthService().getUserInfo()).userId;
+    await EventService().setNewEvent(Event(0, _eventName, _description, _location.first.longitude, _location.first.longitude, creatorId, _startDate, _endDate, _price));
     //_type = _eventTypeCtrl.text;
     //TODO event creation system
     //TODO error system

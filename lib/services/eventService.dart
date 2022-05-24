@@ -19,8 +19,25 @@ class EventService{
       print(eventsData);
       return eventsData;
     }
-    //print(jsonDecode(res.body).toString());
-    //print(res.statusCode.toString());
     return <Event>[];
+  }
+
+  Future<String> setNewEvent(Event event) async {
+
+    String jwt = await AuthService().jwtOrEmpty;
+
+    var res = await http.post(Uri.parse("$serverIP/api/event"),
+        headers: {'Authorization': jwt, "content-type":"application/json"},
+        body: jsonEncode(event.toJson())
+    );
+    print(jsonEncode(event.toJson()));
+    print(res.statusCode.toString());
+
+    if (res.statusCode == 200) {
+      return res.statusCode.toString();
+    }
+    print(res.body);
+    print(res.statusCode.toString());
+    return res.statusCode.toString();
   }
 }
