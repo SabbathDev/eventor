@@ -1,9 +1,10 @@
 import 'package:eventor/models/event_list_model.dart';
-import 'package:eventor/services/marker_generator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import '../services/location_service.dart';
+import 'package:eventor/services/location_service.dart';
+import 'package:provider/provider.dart';
+
 
 class MapPage extends StatefulWidget {
   const MapPage({Key? key}) : super(key: key);
@@ -20,7 +21,6 @@ class _MapPageState extends State<MapPage> {
   @override
   void initState() {
     super.initState();
-    markers = MarkerGenerator(EventListModel().events).generate();
     centerOnUser();
   }
 
@@ -42,7 +42,14 @@ class _MapPageState extends State<MapPage> {
             TileLayerOptions(
                 urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                 subdomains: ['a', 'b', 'c']),
-            MarkerLayerOptions(markers: markers),
+            MarkerLayerOptions(markers:
+              context.watch<EventListModel>().events.map(
+                  (event) => Marker(
+                      point: event.location,
+                      builder: (ctx) => const FlutterLogo()
+                  )
+              ).toList()
+            ),
           ],
         ),
       ),
