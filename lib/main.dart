@@ -1,4 +1,4 @@
-import 'package:eventor/models/eventListModel.dart';
+import 'package:eventor/models/event_list_model.dart';
 import 'package:eventor/pages/edit_profile.dart';
 import 'package:eventor/pages/login.dart';
 import 'package:eventor/pages/main_screen.dart';
@@ -6,7 +6,7 @@ import 'package:eventor/pages/registration.dart';
 import 'package:flutter/material.dart';
 import 'package:eventor/theme/theme_constants.dart';
 import 'package:provider/provider.dart';
-import 'models/loginModel.dart';
+import 'models/login_model.dart';
 import 'pages/event_creation.dart';
 
 void main() async {

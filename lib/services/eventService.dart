@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:eventor/entities/event.dart';
 import 'package:eventor/services/api_constants.dart';
 import 'package:http/http.dart' as http;
+import 'auth_service.dart';
 
-import 'AuthService.dart';
 
 class EventService{
 

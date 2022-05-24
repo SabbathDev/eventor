@@ -1,9 +1,7 @@
 import 'dart:convert';
 import 'package:eventor/dao/current_user.dart';
-import 'package:eventor/models/loginModel.dart';
 import 'package:eventor/services/api_constants.dart';
 import 'package:http/http.dart' as http;
-import 'package:provider/provider.dart';
 
 
 class AuthService {

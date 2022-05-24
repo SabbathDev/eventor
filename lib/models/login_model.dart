@@ -1,7 +1,4 @@
-import 'package:eventor/services/api_constants.dart';
-import 'package:flutter/material.dart';
-
-import '../services/AuthService.dart';
+import '../services/auth_service.dart';
 
 
 class LoginModel{

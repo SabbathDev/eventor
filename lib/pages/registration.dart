@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:eventor/dao/current_user.dart';
-import '../services/AuthService.dart';
+import '../services/auth_service.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({Key? key, title}) : super(key: key);

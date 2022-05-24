@@ -20,6 +20,4 @@ class CurrentUser extends User{
   set email(String value) {
     _email = value;
   }
-
-  int get userId => super.userId;
 }

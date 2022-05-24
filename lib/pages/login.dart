@@ -1,6 +1,4 @@
-import 'package:eventor/dao/current_user.dart';
-import 'package:eventor/dao/current_user.dart';
-import 'package:eventor/services/AuthService.dart';
+import 'package:eventor/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -27,7 +25,7 @@ class _LoginState extends State<Login> {
       Navigator.pushReplacementNamed(context, '/main_screen');
     }else{
       print('Auth Fail');
-    };
+    }
 
     _emailController.clear();
     _passwordController.clear();

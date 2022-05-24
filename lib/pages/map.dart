@@ -1,4 +1,4 @@
-import 'package:eventor/models/eventListModel.dart';
+import 'package:eventor/models/event_list_model.dart';
 import 'package:eventor/services/marker_generator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -26,7 +26,6 @@ class _MapPageState extends State<MapPage> {
 
   void centerOnUser() async {
     currentLoc = await LocationService().getUserLocation();
-    print(currentLoc.toString());
     mapController.move(currentLoc, 13);
   }
 

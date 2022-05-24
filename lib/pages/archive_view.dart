@@ -1,7 +1,6 @@
-import 'package:eventor/models/eventListModel.dart';
+import 'package:eventor/models/event_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 
 
 class ArchiveView extends StatelessWidget {

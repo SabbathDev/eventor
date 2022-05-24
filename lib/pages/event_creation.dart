@@ -1,11 +1,9 @@
-import 'package:eventor/models/eventListModel.dart';
-import 'package:eventor/services/AuthService.dart';
+import 'package:eventor/services/auth_service.dart';
 import 'package:eventor/services/eventService.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:eventor/entities/event.dart';
 
-import '../entities/user.dart';
 
 class EventCreationPage extends StatefulWidget {
   const EventCreationPage({Key? key}) : super(key: key);
@@ -29,7 +27,7 @@ class _EventCreationPageState extends State<EventCreationPage> {
   late DateTime _endDate;
   late String _description;
   late double _price;
-  late String _type;
+  //late String _type;
 
   void _buttonAction() async{
     _eventName = _eventNameCtrl.text;

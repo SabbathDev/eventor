@@ -1,4 +1,4 @@
-import 'package:eventor/models/eventListModel.dart';
+import 'package:eventor/models/event_list_model.dart';
 import 'package:eventor/pages/events.dart';
 import 'package:eventor/pages/map.dart';
 import 'package:eventor/pages/profile.dart';
