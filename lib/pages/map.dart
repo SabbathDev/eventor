@@ -1,3 +1,5 @@
+import 'package:eventor/models/eventListModel.dart';
+import 'package:eventor/services/marker_generator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
@@ -11,16 +13,22 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
-  LatLng currentLoc = LatLng(53.8467373, 27.5677141);
-
+  late LatLng currentLoc;
+  late List<Marker> markers;
   final MapController mapController = MapController();
 
-  void _centerOnUser() async{
-    currentLoc = await LocationService().getUserLocation();
-    mapController.move(currentLoc, 13);
+  @override
+  void initState() {
+    super.initState();
+    markers = MarkerGenerator(EventListModel().events).generate();
+    centerOnUser();
   }
 
-  void _addEvent() { }//TODO logic for event creation
+  void centerOnUser() async {
+    currentLoc = await LocationService().getUserLocation();
+    print(currentLoc.toString());
+    mapController.move(currentLoc, 13);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,29 +37,16 @@ class _MapPageState extends State<MapPage> {
         child: FlutterMap(
           mapController: mapController,
           options: MapOptions(
-            center: currentLoc, //TODO center on user location
             zoom: 13.0,
           ),
           layers: [
             TileLayerOptions(
                 urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                subdomains: ['a', 'b', 'c']
-            ),
-            MarkerLayerOptions(
-              markers: [
-                Marker(
-                  width: 80.0,
-                  height: 80.0,
-                  point: currentLoc,
-                  builder: (ctx) =>
-                  const FlutterLogo(),
-                ),
-              ],
-            ),
+                subdomains: ['a', 'b', 'c']),
+            MarkerLayerOptions(markers: markers),
           ],
         ),
       ),
-
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.pushNamed(context, '/map/createEvent'),
         tooltip: 'Increment',
