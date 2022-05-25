@@ -1,6 +1,7 @@
-import 'package:eventor/pages/archive_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:eventor/pages/archive_view.dart';
+
 
 class EventsPage extends StatefulWidget {
   const EventsPage({Key? key}) : super(key: key);
@@ -11,9 +12,11 @@ class EventsPage extends StatefulWidget {
 
 class _EventsPageState extends State<EventsPage> with TickerProviderStateMixin {
   int _selectedSegment = 0;
+
   late List<Widget> eventPages = [
-    const ArchiveView(), //TODO dynamically load event lists for each tab
-    const ArchiveView()
+    const ArchiveView(),
+    const ArchiveView(),
+    const ArchiveView(),
   ];
 
   @override
@@ -26,8 +29,9 @@ class _EventsPageState extends State<EventsPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final Map<int, Widget> eventsTabNames =  <int, Widget>{
-      0: const Text('My events'),
-      1: const Text('Subscribed events'),
+      0: const Text('All'),
+      1: const Text('My'),
+      2: const Text('Subscribed'),
     };
 
     return Scaffold(

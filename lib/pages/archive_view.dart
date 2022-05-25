@@ -7,13 +7,9 @@ class ArchiveView extends StatelessWidget {
   const ArchiveView({Key? key}) : super(key: key);
 
   String _printDuration(Duration duration){
-    if(duration.inDays>0){
-      return '${duration.inDays} days';
-    }else if(duration.inHours>0){
-      return '${duration.inHours} hours';
-    }else if(duration.inMinutes>0){
-      return '${duration.inMinutes} minutes';
-    }
+    if(duration.inDays>0) return '${duration.inDays} days';
+    if(duration.inHours>0) return '${duration.inHours} hours';
+    if(duration.inMinutes>0) return '${duration.inMinutes} minutes';
     return '0';
   }
 
