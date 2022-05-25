@@ -66,7 +66,6 @@ class Event {
       "endDate": _endDate.toIso8601String(),
       "status": _status,
       "archive": false,
-      "confirmation": false,
       "users": [],
       "creator": {
         "id": _creatorId,

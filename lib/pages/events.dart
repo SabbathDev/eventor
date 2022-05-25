@@ -1,7 +1,8 @@
+import 'package:eventor/models/event_list_model.dart';
+import 'package:eventor/pages/archive_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:eventor/pages/archive_view.dart';
-
+import 'package:provider/provider.dart';
 
 class EventsPage extends StatefulWidget {
   const EventsPage({Key? key}) : super(key: key);
@@ -14,8 +15,8 @@ class _EventsPageState extends State<EventsPage> with TickerProviderStateMixin {
   int _selectedSegment = 0;
 
   late List<Widget> eventPages = [
-    const ArchiveView(),
-    const ArchiveView(),
+    const ArchiveView(nameOfList: 'myEvents'),
+    const ArchiveView(nameOfList: 'allActiveEvents'),
     const ArchiveView(),
   ];
 
@@ -79,12 +80,18 @@ class _EventsPageState extends State<EventsPage> with TickerProviderStateMixin {
           )
       ),
 
-      body: ListView(
-        children: [
-          SingleChildScrollView(
-            child: getChildWidget(),
-          )
-        ]
+      body: RefreshIndicator(
+        onRefresh: () async{
+          await context.read<EventListModel>().loadAllEvents();
+          return Future<void>.delayed(const Duration(seconds: 1));
+          },
+        child: ListView(
+          children: [
+            SingleChildScrollView(
+              child: getChildWidget(),
+            )
+          ]
+        ),
       ),
 
       floatingActionButton: FloatingActionButton(

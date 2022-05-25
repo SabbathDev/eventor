@@ -51,7 +51,7 @@ class _EventCreationPageState extends State<EventCreationPage> {
     print(_price);
 
     int creatorId = (await AuthService().getUserInfo()).userId;
-    await EventService().setNewEvent(Event(0, _eventName, _description, _location.first.longitude, _location.first.longitude, creatorId, _startDate, _endDate, _price));
+    await EventService().setNewEvent(Event(0, _eventName, _description, _location.first.longitude, _location.first.latitude, creatorId, _startDate, _endDate, _price));
     //_type = _eventTypeCtrl.text;
     //TODO event creation system
     //TODO error system
