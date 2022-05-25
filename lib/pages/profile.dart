@@ -1,6 +1,8 @@
+import 'package:eventor/models/event_list_model.dart';
 import 'package:eventor/pages/archive_view.dart';
 import 'package:eventor/pages/personal_info_view.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../services/auth_service.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -80,31 +82,37 @@ class _ProfilePageState extends State<ProfilePage>
           ]
       ),
       body: SafeArea(
-        child: ListView(
-          children: [
-            Column(
-                children: const [
-                  SizedBox(height: 45.0,),
-                  Center(
-                    child: CircleAvatar(
-                      radius: 50.0,
-                      backgroundImage: AssetImage('assets/images/avatar.webp'),//TODO: load user avatar
+        child: RefreshIndicator(
+          onRefresh: () async {
+            await context.read<EventListModel>().loadAllEvents();
+            return Future<void>.delayed(const Duration(seconds: 1));
+          },
+          child: ListView(
+            children: [
+              Column(
+                  children: const [
+                    SizedBox(height: 45.0,),
+                    Center(
+                      child: CircleAvatar(
+                        radius: 50.0,
+                        backgroundImage: AssetImage('assets/images/avatar.webp'),//TODO: load user avatar
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 55.0,),
-                ]
-            ),
-            TabBar(
-              controller: _tabController,
-              tabs: myTabs,
-            ),
-            Center(
-              child: [
-                const PersonalInformationView(),
-                const ArchiveView(),
-              ][_tabController.index],
-            ),
-          ],
+                    SizedBox(height: 55.0,),
+                  ]
+              ),
+              TabBar(
+                controller: _tabController,
+                tabs: myTabs,
+              ),
+              Center(
+                child: [
+                  const PersonalInformationView(),
+                  const ArchiveView(nameOfList: 'myEvents',),
+                ][_tabController.index],
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: _tabController.index == 0 ? FloatingActionButton(

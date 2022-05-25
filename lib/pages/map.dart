@@ -43,7 +43,7 @@ class _MapPageState extends State<MapPage> {
                 urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                 subdomains: ['a', 'b', 'c']),
             MarkerLayerOptions(markers:
-              context.watch<EventListModel>().events.map(
+              context.watch<EventListModel>().allActiveEvents.map(
                   (event) => Marker(
                       point: event.location,
                       builder: (ctx) => const FlutterLogo()

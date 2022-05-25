@@ -40,4 +40,18 @@ class EventService{
     print(res.statusCode.toString());
     return res.statusCode.toString();
   }
+
+  Future<List<Event>> getMyActiveEvents() async {
+    String jwt = await AuthService().jwtOrEmpty;
+    var res = await http.get(Uri.parse("$serverIP/api/event/my/active"),
+        headers: {'Authorization': jwt});
+    print(res.statusCode.toString());
+    if (res.statusCode == 200) {
+      List<Event> eventsData;
+      eventsData = (jsonDecode(res.body) as List<dynamic>).map((e) => Event.fromJson(e)).toList();
+      print(eventsData);
+      return eventsData;
+    }
+    return <Event>[];
+  }
 }
