@@ -12,7 +12,7 @@ class ArchiveView extends StatelessWidget {
     if (duration.inDays > 0) return '${duration.inDays} days';
     if (duration.inHours > 0) return '${duration.inHours} hours';
     if (duration.inMinutes > 0) return '${duration.inMinutes} minutes';
-    return '0';
+    return 'Expired';
   }
 
   List<Widget> getListCard(
@@ -75,7 +75,7 @@ class ArchiveView extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline1,
                 ),
               ),
-              IconButton(icon: const Icon(Icons.delete), onPressed: () {})
+              //IconButton(icon: const Icon(Icons.delete), onPressed: () {})
             ],
           ),
         ),

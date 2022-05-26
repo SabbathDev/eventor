@@ -1,5 +1,6 @@
 import 'package:eventor/entities/user.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:latlong2/latlong.dart';
 
 class Event {
@@ -9,6 +10,7 @@ class Event {
   late String _name;
   late String _description;
   late LatLng _location;
+  late String _locationString;
   late int _creatorId;
   late DateTime _startDate;
   late DateTime _endDate;
@@ -19,9 +21,13 @@ class Event {
 
 
   Event(this._eventId, this._name, this._description, double longitude,
-      double latitude, this._creatorId, this._startDate, this._endDate, this._price){
+      double latitude, this._creatorId, this._startDate, this._endDate, this._price, [this._locationString = '']){
     _location = LatLng(latitude, longitude);
     _setStatusAndDuration();
+  }
+
+  Future<void> getLocation() async {
+     _locationString = (await placemarkFromCoordinates(_location.latitude, _location.longitude))[0].name.toString();
   }
 
   void _setStatusAndDuration(){
@@ -89,6 +95,8 @@ class Event {
       }
     };
   }
+
+  String get locationString => _locationString;
 
   int get eventId => _eventId;
 
