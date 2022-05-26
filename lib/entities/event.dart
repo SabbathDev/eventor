@@ -1,4 +1,5 @@
 import 'package:eventor/entities/user.dart';
+import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 
 class Event {
@@ -14,6 +15,7 @@ class Event {
   late double _price;
   late String _status;
   late Duration _duration;
+  late Color _statusColor;
 
 
   Event(this._eventId, this._name, this._description, double longitude,
@@ -26,16 +28,20 @@ class Event {
     DateTime simpleDate = DateTime.now();
     if(simpleDate.isBefore(_startDate)){
       _status = 'Scheduled';
+      _statusColor = Colors.grey;
       _duration = _startDate.difference(simpleDate);
-    }else {
-      if (simpleDate.isBefore(_endDate)) {
-        _status = 'Started';
-        _duration = _endDate.difference(simpleDate);
-      } else {
-        if (simpleDate.isAfter(_endDate)) {
-          _status = 'Ended';
-        }
-      }
+      return;
+    }
+    if (simpleDate.isBefore(_endDate)) {
+      _status = 'Started';
+      _statusColor = Colors.green;
+      _duration = _endDate.difference(simpleDate);
+      return;
+    }
+    if (simpleDate.isAfter(_endDate)) {
+      _status = 'Ended';
+      _statusColor = Colors.red;
+      return;
     }
   }
 
@@ -103,4 +109,5 @@ class Event {
 
   Duration get duration => _duration;
 
+  Color get statusColor => _statusColor;
 }
