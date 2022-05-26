@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class PersonalInformationView extends StatefulWidget {
+import '../models/current_user_model.dart';
+import '../services/current_user_service.dart';
+
+
+class PersonalInformationView extends StatelessWidget {
   const PersonalInformationView({Key? key}) : super(key: key);
-
-  @override
-  State<PersonalInformationView> createState() => _PersonalInformationViewState();
-}
-
-class _PersonalInformationViewState extends State<PersonalInformationView> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,7 +27,7 @@ class _PersonalInformationViewState extends State<PersonalInformationView> {
               decoration: InputDecoration(
                 prefixIcon: const Icon(Icons.person_outline),
                 border: const OutlineInputBorder(),
-                hintText: 'Name',//TODO:user data
+                hintText: context.watch<CurrentUserModel>().currentUser.name,
                 hintStyle: Theme.of(context).textTheme.headline2,
               )),
         ),
@@ -45,7 +44,7 @@ class _PersonalInformationViewState extends State<PersonalInformationView> {
               decoration: InputDecoration(
                 prefixIcon: const Icon(Icons.mail_outline_rounded),
                 border: const OutlineInputBorder(),
-                hintText: 'Email',//TODO:user data
+                hintText: context.watch<CurrentUserModel>().currentUser.email,
                 hintStyle: Theme.of(context).textTheme.headline2,
               )),
         ),
@@ -62,7 +61,7 @@ class _PersonalInformationViewState extends State<PersonalInformationView> {
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.phone_android),
                   border: const OutlineInputBorder(),
-                  hintText: 'Phone number',//TODO:user data
+                  hintText: context.watch<CurrentUserModel>().currentUser.phone,
                   hintStyle: Theme.of(context).textTheme.headline2,
                 )),
           ),
@@ -79,7 +78,7 @@ class _PersonalInformationViewState extends State<PersonalInformationView> {
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.work_outline),
                   border: const OutlineInputBorder(),
-                  hintText: 'Place of work',//TODO: user data
+                  hintText: context.watch<CurrentUserModel>().currentUser.work,
                   hintStyle: Theme.of(context).textTheme.headline2,
                 )),
           ),

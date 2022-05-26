@@ -39,8 +39,9 @@ class Event {
       return;
     }
     if (simpleDate.isAfter(_endDate)) {
-      _status = 'Ended';
+      _duration = const Duration(days: 0);
       _statusColor = Colors.red;
+      _status = 'Ended';
       return;
     }
   }

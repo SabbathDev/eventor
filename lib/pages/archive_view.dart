@@ -19,12 +19,16 @@ class ArchiveView extends StatelessWidget {
       BuildContext context, EventListModel eventsModel, String nameOfList) {
     switch (nameOfList) {
       case 'allActiveEvents':
-        return eventsModel.allActiveEvents
-            .map((event) => getCard(context, event))
+          return eventsModel.allActiveEvents.map((event) => getCard(context, event))
+              .toList();
+      case 'myActiveEvents':
+        return eventsModel.myActiveEvents.map((event) => getCard(context, event))
             .toList();
-      case 'myEvents':
-        return eventsModel.myEvents
-            .map((event) => getCard(context, event))
+      case 'myArchiveEvents':
+        return eventsModel.myArchiveEvents.map((event) => getCard(context, event))
+            .toList();
+      case 'mySubscribedEvents':
+        return eventsModel.mySubscribedEvents.map((event) => getCard(context, event))
             .toList();
       default:
         return eventsModel.allActiveEvents

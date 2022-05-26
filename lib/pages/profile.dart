@@ -108,7 +108,7 @@ class _ProfilePageState extends State<ProfilePage>
               Center(
                 child: [
                   const PersonalInformationView(),
-                  const ArchiveView(nameOfList: 'myEvents',),
+                  const ArchiveView(nameOfList: 'myArchiveEvents'),
                 ][_tabController.index],
               ),
             ],

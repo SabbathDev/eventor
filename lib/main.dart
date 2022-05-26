@@ -1,3 +1,4 @@
+import 'package:eventor/models/current_user_model.dart';
 import 'package:eventor/models/event_list_model.dart';
 import 'package:eventor/pages/edit_profile.dart';
 import 'package:eventor/pages/login.dart';
@@ -17,6 +18,7 @@ void main() async {
       MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => EventListModel()),
+          ChangeNotifierProvider(create: (_) => CurrentUserModel()),
         ],
         child: Eventor(loginModel: loginModel),
       )
