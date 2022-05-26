@@ -14,8 +14,9 @@ class EventsPage extends StatefulWidget {
 class _EventsPageState extends State<EventsPage> with TickerProviderStateMixin {
   int _selectedSegment = 0;
   late List<Widget> eventPages = [
-    const ArchiveView(nameOfList: 'myEvents'), //TODO dynamically load event lists for each tab
-    const ArchiveView(nameOfList: 'allActiveEvents')
+    const ArchiveView(nameOfList: 'allActiveEvents'), //TODO dynamically load event lists for each tab
+    const ArchiveView(nameOfList: 'myActiveEvents'),
+    const ArchiveView(nameOfList: 'mySubscribedEvents'),
   ];
 
   @override
@@ -28,8 +29,9 @@ class _EventsPageState extends State<EventsPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final Map<int, Widget> eventsTabNames =  <int, Widget>{
-      0: const Text('My events'),
-      1: const Text('Subscribed events'),
+      0: const Text('All'),
+      1: const Text('My'),
+      2: const Text('Subscribed'),
     };
 
     return Scaffold(

@@ -15,7 +15,7 @@ class ArchiveView extends StatelessWidget {
     } else if (duration.inMinutes > 0) {
       return '${duration.inMinutes} minutes';
     }
-    return '0';
+    return 'Expired';
   }
 
   List<Card> getListCard(BuildContext context, EventListModel eventsModel, String nameOfList){
@@ -25,9 +25,16 @@ class ArchiveView extends StatelessWidget {
           return eventsModel.allActiveEvents.map((event) => getCard(context, event))
               .toList();
         }
-        break;
-      case 'myEvents':{
-        return eventsModel.myEvents.map((event) => getCard(context, event))
+      case 'myActiveEvents':{
+        return eventsModel.myActiveEvents.map((event) => getCard(context, event))
+            .toList();
+      }
+      case 'myArchiveEvents':{
+        return eventsModel.myArchiveEvents.map((event) => getCard(context, event))
+            .toList();
+      }
+      case 'mySubscribedEvents':{
+        return eventsModel.mySubscribedEvents.map((event) => getCard(context, event))
             .toList();
       }
       default:{
@@ -35,7 +42,6 @@ class ArchiveView extends StatelessWidget {
             .toList();
       }
     }
-
   }
 
   Card getCard(BuildContext context, Event event){
@@ -67,10 +73,6 @@ class ArchiveView extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline1,
               ),
             ),
-            IconButton(
-              icon: const Icon(Icons.delete),
-              onPressed: () {},
-            )
           ],
         ),
       ),

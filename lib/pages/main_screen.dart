@@ -1,3 +1,4 @@
+import 'package:eventor/models/current_user_model.dart';
 import 'package:eventor/models/event_list_model.dart';
 import 'package:eventor/pages/events.dart';
 import 'package:eventor/pages/map.dart';
@@ -24,7 +25,8 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<EventListModel>().loadAllActiveEvents();
+    context.read<EventListModel>().loadAllEvents();
+    context.read<CurrentUserModel>().loadCurrentUser();
   }
 
   @override

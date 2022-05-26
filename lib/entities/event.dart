@@ -33,6 +33,7 @@ class Event {
         _duration = _endDate.difference(simpleDate);
       } else {
         if (simpleDate.isAfter(_endDate)) {
+          _duration = const Duration(days: 0);
           _status = 'Ended';
         }
       }

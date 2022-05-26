@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:eventor/entities/event.dart';
 
+import '../services/current_user_service.dart';
+
 
 class EventCreationPage extends StatefulWidget {
   const EventCreationPage({Key? key}) : super(key: key);
@@ -31,30 +33,30 @@ class _EventCreationPageState extends State<EventCreationPage> {
 
   void _buttonAction() async{
     _eventName = _eventNameCtrl.text;
-    print(_eventName);
+    _startDate = DateTime.parse(_startDateCtrl.text);
+    _endDate = DateTime.parse(_endDateCtrl.text);
+    _description = _descriptionCtrl.text;
+    _price = double.parse(_priceCtrl.text);
+
     try {
       _location = await locationFromAddress(_locationCtrl.text);
-      print(_location.first.latitude);
-      print(_location.first.longitude);
     } catch (e) {
       print(e);
     }
-    _startDate = DateTime.parse(_startDateCtrl.text);
-    _endDate = DateTime.parse(_endDateCtrl.text);
-    print(_startDate.toIso8601String());
-    print(_endDate.toLocal());
-    print(_endDate.toUtc());
 
-    _description = _descriptionCtrl.text;
-    print(_description);
-    _price = double.parse(_priceCtrl.text);
-    print(_price);
+    int creatorId = (await CurrentUserService().getUserInfo()).userId;
 
-    int creatorId = (await AuthService().getUserInfo()).userId;
-    await EventService().setNewEvent(Event(0, _eventName, _description, _location.first.longitude, _location.first.latitude, creatorId, _startDate, _endDate, _price));
-    //_type = _eventTypeCtrl.text;
-    //TODO event creation system
-    //TODO error system
+    if(await EventService().setNewEvent(Event(0, _eventName, _description, _location.first.longitude, _location.first.latitude, creatorId, _startDate, _endDate, _price)) == '200') {
+      _eventNameCtrl.clear();
+      _startDateCtrl.clear();
+      _endDateCtrl.clear();
+      _descriptionCtrl.clear();
+      _priceCtrl.clear();
+      _eventTypeCtrl.clear();
+      Navigator.pop(context);
+    }else{
+      print('Update Fail');
+    }
   }
 
   @override

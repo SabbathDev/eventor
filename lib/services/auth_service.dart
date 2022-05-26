@@ -54,20 +54,6 @@ class AuthService {
     }
   }
 
-  Future<CurrentUser> getUserInfo() async {
-
-    String jwt = await jwtOrEmpty;
-    var res = await http.get(Uri.parse("$serverIP/api/user/me"),
-        headers: {'Authorization': jwt});
-    if (res.statusCode == 200) {
-      Map<String, dynamic> bodyInf = jsonDecode(res.body);
-      return CurrentUser(bodyInf['id'], bodyInf['name'], bodyInf['email'], '');
-    }else{
-      storage.write(key: "jwt", value: '');
-    }
-    return CurrentUser(-1, '', '', '');
-  }
-
   Future<String> signIn(String name, String email, String password) async{
     var res = await http.post(Uri.parse("$serverIP/api/registration"),
         headers: {
