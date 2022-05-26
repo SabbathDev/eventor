@@ -114,7 +114,7 @@ class EventViewPage extends StatelessWidget {
                     ])
                   ])),
           Padding(
-              padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+              padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: OutlinedButton(
                   style: OutlinedButton.styleFrom(
                       backgroundColor: Colors.blue[500],
