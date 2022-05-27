@@ -83,4 +83,26 @@ class EventService{
 
     return <Event>[];
   }
+
+  Future<String> subscribeToEvent(Event event) async {
+    String jwt = await AuthService().jwtOrEmpty;
+    var res = await http.post(Uri.parse("$serverIP/api/event/subscribe"),
+        headers: {'Authorization': jwt, "content-type":"application/json"},
+        body: jsonEncode({
+          "id": event.eventId,
+          "name": event.name,
+          "description": event.description,
+          "image": null,
+          "longitude": event.location.longitude,
+          "latitude": event.location.latitude,
+          "price": event.price,
+          "startDate": event.startDate.toIso8601String(),
+          "endDate": event.endDate.toIso8601String()
+        })
+    );
+
+    print('Subscription code ${res.statusCode.toString()}');
+
+    return res.statusCode.toString();
+  }
 }
