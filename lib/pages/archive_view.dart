@@ -19,16 +19,20 @@ class ArchiveView extends StatelessWidget {
       BuildContext context, EventListModel eventsModel, String nameOfList) {
     switch (nameOfList) {
       case 'allActiveEvents':
-          return eventsModel.allActiveEvents.map((event) => getCard(context, event))
-              .toList();
+        return eventsModel.allActiveEvents
+            .map((event) => getCard(context, event))
+            .toList();
       case 'myActiveEvents':
-        return eventsModel.myActiveEvents.map((event) => getCard(context, event))
+        return eventsModel.myActiveEvents
+            .map((event) => getCard(context, event))
             .toList();
       case 'myArchiveEvents':
-        return eventsModel.myArchiveEvents.map((event) => getCard(context, event))
+        return eventsModel.myArchiveEvents
+            .map((event) => getCard(context, event))
             .toList();
       case 'mySubscribedEvents':
-        return eventsModel.mySubscribedEvents.map((event) => getCard(context, event))
+        return eventsModel.mySubscribedEvents
+            .map((event) => getCard(context, event))
             .toList();
       default:
         return eventsModel.allActiveEvents
@@ -39,48 +43,45 @@ class ArchiveView extends StatelessWidget {
 
   Widget getCard(BuildContext context, Event event) {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (BuildContext context) => EventViewPage(event),
-          ),
-        );
-      },
-      child: Card(
-        margin: const EdgeInsets.all(12.0),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      event.name,
-                      style: Theme.of(context).textTheme.headline1,
-                    ),
-                    Text(
-                      event.description,
-                      style: Theme.of(context).textTheme.headline2,
-                    )
-                  ],
-                ),
-              ),
-              Padding(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (BuildContext context) => EventViewPage(event),
+            ),
+          );
+        },
+        child: Card(
+            margin: const EdgeInsets.all(12.0),
+            child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  _printDuration(event.duration),
-                  style: Theme.of(context).textTheme.headline1,
-                ),
-              ),
-              IconButton(icon: const Icon(Icons.delete), onPressed: () {})
-            ],
-          ),
-        ),
-      ),
-    );
+                child: Row(children: [
+                  Expanded(
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                        Text(
+                          event.name,
+                          style: Theme.of(context).textTheme.headline1,
+                        ),
+                        Text(
+                          event.description,
+                          style: Theme.of(context).textTheme.headline2,
+                        )
+                      ])),
+                  Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(children: [
+                        Text(
+                          _printDuration(event.duration),
+                          style: Theme.of(context).textTheme.headline1,
+                        ),
+                        Text(event.status,
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                                fontSize: 13, color: event.statusColor))
+                      ]))
+                ]))));
   }
 
   @override
